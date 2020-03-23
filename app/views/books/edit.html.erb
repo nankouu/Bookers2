@@ -1,0 +1,11 @@
+<h1>Editing Book</h1>
+<%= form_for(@book, url:"/books/#{@book.id}") do |f| %>
+    <h4>Title</h4>
+    <%= f.text_field :title,autofocus: true, class:"form-control",placeholder:"title"%>
+    <h4>Body</h4>
+    <%= f.text_field :body,autofocus: true, class:"form-control",placeholder:"opinion"%>
+    <h4><%= f.submit 'Update Book', class: "btn btn-default" %></h4>
+<% end %>
+
+<%= link_to"Show", book_path %>
+<%= link_to"Back", books_path %>

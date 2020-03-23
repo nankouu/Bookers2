@@ -1,0 +1,31 @@
+<div class="main users-edit">
+  <div class="container">
+    <div class="form-heading">アカウント編集</div>
+    <div class="form users-form">
+      <div class="form-body">
+        <!-- エラーメッセージを表示するためのHTMLを貼り付けてください -->
+        <% @user.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>
+        
+        <!-- フォームの送信先を指定してください -->
+
+                              <%= form_for(@user) do |f| %>
+                                 <div><%= f.attachment_field :image %></div>
+                                      <label class="control-label sr-only" for="inputEmail">Name</label>
+                                    <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"名前"%>
+                                      <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+
+                                  <label>Introduction</label>
+                                  <%= f.text_field :introduction,autofocus: true, class:"form-control", id:"inputEmail",placeholder:"自己紹介"%>
+
+                                  <div class="form-group has-icon">
+                                        <label class="control-label sr-only" for="inputEmail">ProfileImage</label>
+                                  <%= f.submit "変更を保存", class:"btn btn-lg btn-block btn-base-1 mt-20" %>
+                              <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <h1>Bookers</h1>
+      <ul class="nav nav-pills nav-justified">
+        <% if user_signed_in? %>
+          <!-- ログインしている状態でヘッダーに表示するHTMLを貼り付けてください -->
+          <li>
+            <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-book" aria-hidden="true">
+            <%= link_to("Books", "/books") %>
+              </span>
+            </button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-user" aria-hidden="true">
+            <%= link_to("Users", "/users") %>
+              </span>
+            </button>
+          </li>
+            <li>
+              <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-home" aria-hidden="true">
+            <%= link_to "HOME", user_path(current_user.id)%>
+            </span>
+            </button>
+          </li>
+          <li>
+                        <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-log-out" aria-hidden="true">
+          <%= link_to "logout",destroy_user_session_path,method: :delete %>
+          </li>
+          </span>
+        </button>
+        <% else %>
+          <!-- ログインしていない状態でヘッダーに表示するHTMLを貼り付けてください -->
+          <li>
+            <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-home" aria-hidden="true">
+            <%= link_to "HOME","/homes/index"%>
+          </span>
+        </button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-tree-conifer" aria-hidden="true">
+            <%= link_to "About","/homes/about"%>
+          </span>
+        </button>
+          </li>
+          <li>
+            <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-ok" aria-hidden="true">
+            <%= link_to "sign up", new_user_registration_path  %>
+          </span>
+        </button>
+          </li>
+          <li>
+                        <button type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-log-in" aria-hidden="true">
+            <%= link_to "login", new_user_session_path %>
+          </span>
+        </button>
+          </li>
+        <% end %>
+      </ul>
+    </header>
+
+
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    <%= yield %>
+  </body>
+</html>
