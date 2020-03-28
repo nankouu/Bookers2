@@ -1,18 +1,18 @@
 <div class = "container">
   <div class = "row">
-          <div class ="col-lg-4" style>
-                <h2>User.info</h2>
-                        <%= attachment_image_tag @user, :image,:fill, 60,60, format: "jpeg",fallback:"no_image.jpg"%>
+          <div class ="col-xs-3" style>
+                <h2>User info</h2>
+                        <%= attachment_image_tag @book.user, :profile_image,:fill, 60,60, format: "jpeg",fallback:"no_image.jpg"%>
                           <h3>name</h3>
-                          <p><%= @user.name %></p>
+                          <p><%= @book.user.name %></p>
                           <h3>introduction</h3>
-                 <p><%= @user.introduction %></p>
+                 <p><%= @book.user.introduction %></p>
 
-                <% if @user.id == current_user.id %>
-                <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-default" %>
-                <% end %>
+                <div class="row">
+        　　　　<a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench" href="/users/<%= current_user.id %>"></a>
+      　　　　　</div>
 
-                <h3>New Book</h3>
+                <h3>New book</h3>
                 <%= form_for(@book) do |f| %>
 
                   <% if @book.errors.any? %>
@@ -35,7 +35,8 @@
                     <% end %>
           </div>
 
-            <div class = "col-lg-8">
+            <div class = "col-xs-9">
+              <h3>Book detail</h3>
             <table class = "table table-striped">
 
               <thead>
@@ -48,9 +49,12 @@
 
               <tbody>
 
-
                <tr>
-                 <td><%= attachment_image_tag @book.user, :image,:fill, 60,60, format: "jpeg",fallback:"no_image.jpg"%></td>
+                 <td><%= link_to("/users/#{@book.user.id}") do%>
+                  <%= attachment_image_tag @book.user, :profile_image,:fill, 60,60, format: "jpeg",fallback:"no_image.jpg"%>
+                  <%= @book.user.name %>
+                    <% end %>
+                  </td>
                   <td><%= @book.title %></td>
                   <td><%= @book.body %></td>
                 <% if @book.user.id == current_user.id %>
@@ -63,4 +67,9 @@
            </table>
            </div>
       </div>
+      <div class="row">
+      <div class="col-xs-3 col-xs-offset-9">
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
 </div>

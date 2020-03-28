@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user,only:[:edit,:update]
 
  def index
     @books = Book.all.order(created_at: :desc)
@@ -9,9 +10,9 @@ class BooksController < ApplicationController
   
   def show
     @book = Book.find_by(id: params[:id])
-    @user = current_user
   end
-  
+
+
   def new
     @book = Book.new
   end
@@ -20,7 +21,7 @@ class BooksController < ApplicationController
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
-      flash[:notice] = "投稿を作成しました"
+      flash[:notice] = "successfully"
       redirect_to("/books")
     else
       @books = Book.all.order(created_at: :desc)
@@ -28,14 +29,16 @@ class BooksController < ApplicationController
       render :index
     end
   end
+
   def edit
     @book = Book.find_by(id: params[:id])
   end
+
   def update
     @book = Book.find_by(id: params[:id])
-    if @book.save
-      flash[:notice] = "投稿を編集しました"
-      redirect_to("/books")
+    if @book.update(book_params)
+      flash[:notice] = "successfully"
+      redirect_to("/books/#{@book.id}")
     else
       @books = Book.all.order(created_at: :desc)
       @user = current_user
@@ -53,8 +56,8 @@ def destroy
   private
 def correct_user
   book = Book.find(params[:id])
-    if current_user.id = book.user.user_id
-     redirect_to root_path
+    if current_user.id != book.user.id
+     redirect_to("/books")
     end
 end
 
