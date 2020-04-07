@@ -6,10 +6,13 @@ class BooksController < ApplicationController
     @books = Book.all.order(created_at: :desc)
     @user = current_user
     @book = Book.new
+    @favorite = Favorite.new
   end
   
   def show
     @book = Book.find_by(id: params[:id])
+    @book_comment = BookComment.new
+    @user = current_user
   end
 
 

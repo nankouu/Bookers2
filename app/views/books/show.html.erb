@@ -57,14 +57,74 @@
                   </td>
                   <td><%= @book.title %></td>
                   <td><%= @book.body %></td>
+
+                  <% if @book.favorited_by?(current_user) %>
+
+                    <td><%= link_to book_favorites_path(@book), method: :delete do %>
+                      <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+                      <%= @book.favorites.count %> </td>
+                    <% end %>
+                <% else %>
+
+                    <td><%= link_to book_favorites_path(@book), method: :post do %>
+                      <i class="fa fa-heart-o" aria-hidden="true"></i>
+                      <%= @book.favorites.count %> <i class="far fa-heart"></i>
+                    <% end %></td>
+                <% end %>
+
                 <% if @book.user.id == current_user.id %>
                   <td><%= link_to("Edit","/books/#{@book.id}/edit")%></td>
                   <td><%= link_to("Destroy","/books/#{@book.id}", {method: "delete"})%>
                 <% end %>
-              </tr>
 
+
+                <% if @book_comment.errors.any? %>
+                    <div id="error_explanation" class="alert alert-danger">
+                      <ul>
+                        <% @book_comment.errors.full_messages.each do |message| %>
+                          <li><%= message %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+                <td>コメント数"<%= @book.book_comments.count %>"</td>
+
+                <%= form_for [@book, @book_comment] do |f| %>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+                        </div>
+                    </div>
+                    <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+                <% end %>
+              </tr>
              </tbody>
            </table>
+
+
+
+           <td>
+              <% @book.book_comments.each do |book_comment| %>
+                      <div class="comment-body bb">
+                          <div class="comment-avatar">
+                              <div class="avatar">
+                                  <%= attachment_image_tag @user, :profile_image,:fill, 60,60, format: "jpeg",fallback:"no_image.jpg"%>
+                              </div>
+                          </div>
+                          <div class="comment-text">
+                              <div class="comment-author clearfix">
+                                  <a href="#" class="link-author"><%= book_comment.user.name %></a>
+                                  <span class="comment-meta">
+                                    <span class="comment-date"><%= book_comment.created_at.strftime('%Y/%m/%d') %></span>
+                                  </span>
+                              </div>
+                              <div class="comment-entry"><%= book_comment.comment %></div>
+                          </div>
+                      </div>
+              <% end %>
+          </td>
+
            </div>
       </div>
       <div class="row">

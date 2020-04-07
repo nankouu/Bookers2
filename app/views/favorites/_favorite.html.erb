@@ -1,0 +1,22 @@
+<% if user_signed_in? %>
+  <% if @book.favorite_user(current_user.id) %>
+    <%= button_to book_favorite_path(favorite, book_id: book.id), method: :delete, id: "like-button", remote: true do %>
+      <%= image_tag("icon_red_heart.svg") %>
+      <span>
+        <%= @book.favorite_count %>
+      </span>
+    <% end %>
+  <% else %>
+    <%= button_to book_favorites_path(book), id: "favorite-button", remote: true do %>
+      <%= image_tag("icon_heart.svg") %>
+      <span>
+        <%= @book.favorite_count %>
+      </span>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= image_tag("icon_heart.svg") %>
+    <span>
+      <%= book.favorite_count %>
+    </span>
+<% end %>
