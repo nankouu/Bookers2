@@ -1,0 +1,26 @@
+<table>
+      <tr>
+        <td>
+         <a href="<%= following_user_path(user) %>">
+         <%= "follow: #{user.follower.count}" %></a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="<%= followers_user_path(user) %>">
+            <%= "follower: #{user.followed.count}" %></a>
+      </td>
+      </tr>
+</table>
+
+<% if current_user.id != user.id %>
+    <% if current_user.following?(user) %>
+
+       <button class="btn btn-default"><%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %></button>
+    <% else %>
+      <button class="btn btn-default"><%= link_to 'フォローする', follow_path(user.id), method: :POST %></button>
+    <% end %>
+<% end %>
+
+
+

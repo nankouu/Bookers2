@@ -52,6 +52,21 @@ class UsersController < ApplicationController
      redirect_to("/books")
     end
   end
+
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following_user
+    render 'show_follow'
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.follower_user
+    @book = Book.new
+    render 'show_follower'
+  end
+
+
   private
   def correct_user
     user = User.find(params[:id])
