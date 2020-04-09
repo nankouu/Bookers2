@@ -1,0 +1,11 @@
+<ul>
+ <% @books.each do |book| %>
+  <li>
+    <%= link_to book.title, book %>
+    <%= book.created_at %>
+    <%= book.body %>
+  </li>
+
+  <%= link_to "削除",book, method: :delete %>
+  <% end %>
+</ul>

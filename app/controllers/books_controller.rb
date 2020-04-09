@@ -3,7 +3,7 @@ class BooksController < ApplicationController
   before_action :correct_user,only:[:edit,:update]
 
  def index
-    @books = Book.all.order(created_at: :desc)
+    @books = Book.all
     @user = current_user
     @book = Book.new
     @favorite = Favorite.new
@@ -49,11 +49,15 @@ class BooksController < ApplicationController
     end
   end
 
-def destroy
+  def destroy
     @book = Book.find_by(id: params[:id])
     @book.destroy
     flash[:notice] = "投稿を削除しました"
     redirect_to("/books")
+  end
+
+  def search
+    @books = Book.search(params[:search])
   end
 
   private

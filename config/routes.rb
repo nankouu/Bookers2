@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       get :following,:followers
     end
   end
+  get "search" => "users#search"
   get 'home/index'
   get 'home/about'
   post 'follow/:id' => 'relationships#follow', as: 'follow' # フォローする
