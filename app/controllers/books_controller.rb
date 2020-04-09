@@ -13,6 +13,7 @@ class BooksController < ApplicationController
     @book = Book.find_by(id: params[:id])
     @book_comment = BookComment.new
     @user = current_user
+    @favorite = Favorite.new
   end
 
 
