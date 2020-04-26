@@ -79,4 +79,8 @@ group :test do
   gem 'faker'
 end
 
-gem "jquery-rails"
+gem 'jp_prefecture'
+
+gem 'simple_form'
+
+gem 'dotenv-rails'

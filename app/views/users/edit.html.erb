@@ -24,13 +24,37 @@
         <!-- フォームの送信先を指定してください -->
 
         <%= form_for(@user) do |f| %>
-         <div><%= f.attachment_field :profile_image %></div>
-              <label class="control-label sr-only" for="inputEmail">Name</label>
-            <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"名前"%>
-              <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+        　　<label>Image</label>
+         　<div><%= f.attachment_field :profile_image %></div>
+
+        　　<label>Name</label>
+          <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"名前"%>
+            <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
 
           <label>Introduction</label>
           <%= f.text_field :introduction,autofocus: true, class:"form-control", id:"inputEmail",placeholder:"自己紹介"%>
+
+
+
+           <div class="field">
+           <%= f.label :postcode %><br />
+               <%= f.text_field :postcode, autofocus: true, id:"postcoad",autocomplete: "postcode",placeholder:"郵便番号"%> </div>     
+          <div class="field">
+               <%= f.label :prefecture_code %><br />
+     <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name %>
+          </div>     
+          <div class="field">
+               <%= f.label :address_city %><br />
+               <%= f.text_field :address_city, autofocus: true, autocomplete: "address_city" %>   
+          </div>     
+          <div class="field">
+               <%= f.label :address_street %><br />
+               <%= f.text_field :address_street, autofocus: true, autocomplete: "address_street" %>   
+          </div>     
+          <div class="field">
+               <%= f.label :address_building %><br />
+               <%= f.text_field :address_building, autofocus: true, autocomplete: "address_building" %>   
+          </div> 
 
           <div class="form-group has-icon">
                 <label class="control-label sr-only" for="inputEmail">ProfileImage</label>

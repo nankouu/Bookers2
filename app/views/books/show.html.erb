@@ -52,6 +52,12 @@
                           <td id="favorite-<%= @book.id %>">
                           <%= render 'favorites/favorite',book: @book,user: @user%>
                         </td>
+
+                         <% if current_user.id == @book.user.id %>
+                        <td><%= link_to "Edit",edit_book_path %></td>
+                        <td><%= link_to "Destroy",book_path ,:method => :delete %></td>
+                        <% end %>
+
                         <table id="js-table-comment" class="table">
                           <%= render 'comment',book: @book,user: @user,book_comment: @book_comment%>
                         </table>

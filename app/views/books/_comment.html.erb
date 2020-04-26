@@ -24,25 +24,33 @@
      </table>
 
 
-
-    <td>
         <% book.book_comments.each do |book_comment| %>
+            <tr>
                 <div class="comment-body bb">
                     <div class="comment-avatar">
-                        <div class="avatar">
-                            <%= attachment_image_tag book_comment.user, :profile_image,:fill, 60,60, format: "jpeg",fallback:"no_image.jpg"%>
-                        </div>
+                        <td>
+                            <div class="avatar">
+                                <%= attachment_image_tag book_comment.user, :profile_image,:fill, 60,60, format: "jpeg",fallback:"no_image.jpg"%>
+                            </div>
+                        </td>
                     </div>
                     <div class="comment-text">
-                        <div class="comment-author clearfix">
-                            <a href="#" class="link-author"><%= book_comment.user.name %></a>
+                      <div class="comment-author clearfix">
+                        <td>
+                          <a href="#" class="link-author"><%= book_comment.user.name %></a>
+                        </td>
+                        <td>
                             <span class="comment-meta">
                               <span class="comment-date"><%= book_comment.created_at.strftime('%Y/%m/%d') %></span>
                             </span>
-                        </div>
-                        <div class="comment-entry"><%= book_comment.comment %></div>
+                        </td>
+                      </div>
+                      <td>
+                      <div class="comment-entry"><%= book_comment.comment %></div>
+                      </td>
+                        <%= link_to 'Destroy', book_book_comment_path(book_comment), class: 'btn-sm btn-danger', method: :delete, remote: true %>
                     </div>
                 </div>
+            </tr>
         <% end %>
-    </td>
 </tr>

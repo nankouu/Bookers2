@@ -10,6 +10,7 @@
         <%= render 'books/relationship',user:@user %>
           <h3>name</h3>
           <p><%= @user.name %></p>
+
           <h3>introduction</h3>
          <p><%= @user.introduction %></p>
          <% if @user.id == current_user.id %>
