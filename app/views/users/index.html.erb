@@ -64,9 +64,9 @@
                           <td><%=link_to("Show","/users/#{user.id}")%></td>
                          <td>
                           <% if current_user.following?(user) %>
-                            <%= link_to 'フォロー外す', unfollow_path(user.id), method: :POST %>
+                            <%= button_to 'Unfollow', unfollow_path(user.id), method: :POST,class:"btn btn-primary" %>
                           <% else %>
-                            <%= link_to 'フォローする', follow_path(user.id), method: :POST %>
+                            <%= button_to 'Follow', follow_path(user.id), method: :POST,class:"btn btn-primary" %>
                           <% end %>
                         </td>
                         <td><%= "follow: #{@user.follower.count}" %>      

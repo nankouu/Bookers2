@@ -25,14 +25,18 @@
 
         <%= form_for(@user) do |f| %>
         　　<label>Image</label>
-         　<div><%= f.attachment_field :profile_image %></div>
+         <%= f.attachment_field :profile_image,class:"custom-file-input" %>
 
         　　<label>Name</label>
+        <div class="form-group">
           <%= f.text_field :name, autofocus: true, class:"form-control", id:"inputEmail", placeholder:"名前"%>
             <span class="fa fa-user form-control-icon" aria-hidden="true"></span>
+        </div>
 
+        <div class="form-group">
           <label>Introduction</label>
           <%= f.text_field :introduction,autofocus: true, class:"form-control", id:"inputEmail",placeholder:"自己紹介"%>
+        </div>
 
 
 
